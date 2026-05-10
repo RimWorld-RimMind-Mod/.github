@@ -1,0 +1,106 @@
+name: Bug 报告
+description: 提交一个 Bug 报告
+title: '[Bug] '
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        感谢你的反馈！请填写以下信息帮助我们定位和修复问题。
+
+  - type: input
+    id: rimworld_version
+    attributes:
+      label: RimWorld 版本
+      placeholder: 例如 1.6.0
+    validations:
+      required: true
+
+  - type: input
+    id: rimmind_version
+    attributes:
+      label: RimMind 版本
+      placeholder: 例如 1.0.0 或 commit hash
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mod
+    attributes:
+      label: 相关模组
+      options:
+        - RimMind-Core
+        - RimMind-Actions
+        - RimMind-Advisor
+        - RimMind-Personality
+        - RimMind-Dialogue
+        - RimMind-Memory
+        - RimMind-Storyteller
+        - Bridge-RimTalk
+        - Bridge-RimChat
+        - 其他/不确定
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: 问题描述
+      description: 清晰简洁地描述 Bug 是什么
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: 复现步骤
+      description: 提供详细的复现步骤
+      placeholder: |
+        1. 进入...
+        2. 点击...
+        3. 观察到...
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期行为
+      description: 描述你期望发生的行为
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际行为
+      description: 描述实际发生的行为
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: 日志文件
+      description: |
+        请粘贴相关的日志内容。日志文件位于：
+        - Windows: `%APPDATA%\..\LocalLow\Ludeon Studios\RimWorld by Ludeon Studios\Player.log`
+      render: shell
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: 截图
+      description: 如有截图，请在此上传或粘贴
+
+  - type: checkboxes
+    id: checklist
+    attributes:
+      label: 检查清单
+      options:
+        - label: 我已确认该问题在最新版本中仍然存在
+          required: true
+        - label: 我已搜索现有 Issue，确认没有重复报告
+          required: true
+        - label: 我已提供足够的信息来复现该问题
+          required: true
