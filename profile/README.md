@@ -13,7 +13,7 @@
 
 **RimMind** 是一套面向 **RimWorld 1.6** 的模块化 AI 模组生态系统。通过将现代大语言模型（LLM）的多智能体协同技术与游戏原生机制深度结合，为边缘世界中的殖民者（Pawn）赋予深度的心理活动、长期记忆、自然语言对话和自主意图决策能力。
 
-套件由 **1 个核心基础设施底座**、**6 大功能玩法模组** 与 **2 个第三方兼容桥** 组成，遵循严格的松耦合与单一职责原则。
+套件由 **1 个核心基础设施底座**、**6 大功能玩法模组** 与 **2 个第三方兼容桥** 组成。每个模组均可独立发布与选用，遵循严格的松耦合与单一职责原则。
 
 ---
 
@@ -74,23 +74,36 @@ flowchart TD
 
 ---
 
-## 📦 仓库矩阵与职责划分
+## 📦 开源模组矩阵与仓库索引
 
-| 仓库 | 角色分类 | 对应 PackageId | 说明 |
-|---|---|---|---|
-| [**RimWorld-RimMind-Mod**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod) | 总仓库 (Monorepo) | - | 多模组工程聚合、全局构建测试管线与核心设计文档 |
-| [**RimWorld-RimMind-Mod-Core**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Core) | 核心底座 | `mcocdaa.RimMindCore` | 统一 LLM 请求管线、优先队列、上下文引擎、AgentBus 与 Tool 注册网关 |
-| [**RimWorld-RimMind-Mod-Actions**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Actions) | 动作机制 | `mcocdaa.RimMindActions` | 复合工具（Composite ToolCall）编排与高阶机制动作库 |
-| [**RimWorld-RimMind-Mod-Advisor**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Advisor) | 决策顾问 | `mcocdaa.RimMindAdvisor` | AI 顾问决策循环：自主意图分析、玩家审批流与 Tool Calling 执行反馈 |
-| [**RimWorld-RimMind-Mod-Personality**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Personality) | 人格心理 | `mcocdaa.RimMindPersonality` | 殖民者动态心理状态评估、人格特质演变与 Thought 注入 |
-| [**RimWorld-RimMind-Mod-Dialogue**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Dialogue) | 动态对话 | `mcocdaa.RimMindDialogue` | 殖民者社交/事件拦截对话、玩家主动对话与对话节奏控制 |
-| [**RimWorld-RimMind-Mod-Memory**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Memory) | 记忆系统 | `mcocdaa.RimMindMemory` | 三层记忆架构（活动/归档/潜意识暗记忆）与时序上下文持久化 |
-| [**RimWorld-RimMind-Mod-Storyteller**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Storyteller) | AI 叙事者 | `mcocdaa.RimMindStoryteller` | 基于世界张力与殖民地历史叙事线的 AI 动态事件选择器 |
-| [**RimWorld-RimMind-Mod-Bridge-RimTalk**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Bridge-RimTalk) | 兼容桥接 | `mcocdaa.RimMindBridgeRimTalk` | 与 RimTalk 模组的对话门控协调与数据互通桥 |
-| [**RimWorld-RimMind-Mod-Bridge-RimChat**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Bridge-RimChat) | 兼容桥接 | `mcocdaa.RimMindBridgeRimChat` | 与 RimChat 模组的对话/动作互斥与上下文拉取桥 |
-| [**Workflows**](https://github.com/RimWorld-RimMind-Mod/Workflows) | CI/CD | - | 跨仓库复用的 GitHub Actions 工作流（构建测试矩阵与 AI Release Notes） |
-| [**.github**](https://github.com/RimWorld-RimMind-Mod/.github) | 社区配置 | - | 组织级 Profile、Issue/PR 模板与协作规范 |
-| [**TEST**](https://github.com/RimWorld-RimMind-Mod/TEST) | 测试沙盒 | - | 自动化测试用例与验证环境 |
+所有模组均独立维护与发布，玩家可按需搭配使用（**RimMind-Core 为所有子模组的唯一共同前置**）：
+
+### 核心底座 (Core)
+| 仓库 | PackageId | 说明 |
+|---|---|---|
+| [**RimWorld-RimMind-Mod-Core**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Core) | `mcocdaa.RimMindCore` | 统一 LLM 请求管线、异步优先队列、上下文引擎、AgentBus、Tool 注册网关与公共 API |
+
+### 玩法与决策模组 (Gameplay)
+| 仓库 | PackageId | 说明 |
+|---|---|---|
+| [**RimWorld-RimMind-Mod-Advisor**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Advisor) | `mcocdaa.RimMindAdvisor` | AI 顾问决策循环：小人自主意图分析、玩家审批流与 Tool Calling 执行反馈闭环 |
+| [**RimWorld-RimMind-Mod-Actions**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Actions) | `mcocdaa.RimMindActions` | 复合工具（Composite ToolCall）编排与 25+ 游戏机制高阶动作库 |
+| [**RimWorld-RimMind-Mod-Personality**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Personality) | `mcocdaa.RimMindPersonality` | 殖民者动态心理状态评估、人格特质演变与原生 Thought 注入 |
+| [**RimWorld-RimMind-Mod-Dialogue**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Dialogue) | `mcocdaa.RimMindDialogue` | 殖民者社交/事件拦截对话、玩家主动对话与对话节奏评估 |
+| [**RimWorld-RimMind-Mod-Memory**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Memory) | `mcocdaa.RimMindMemory` | 三层记忆架构（活动/归档/潜意识暗记忆）与时序上下文持久化 |
+| [**RimWorld-RimMind-Mod-Storyteller**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Storyteller) | `mcocdaa.RimMindStoryteller` | 基于世界张力与殖民地历史叙事线的 AI 动态事件叙事者 |
+
+### 第三方兼容桥 (Bridges)
+| 仓库 | PackageId | 说明 |
+|---|---|---|
+| [**RimWorld-RimMind-Mod-Bridge-RimTalk**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Bridge-RimTalk) | `mcocdaa.RimMindBridgeRimTalk` | 与 RimTalk 模组的对话门控协调、人设数据互通与上下文推送桥 |
+| [**RimWorld-RimMind-Mod-Bridge-RimChat**](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Bridge-RimChat) | `mcocdaa.RimMindBridgeRimChat` | 与 RimChat 模组的对话/动作互斥与上下文拉取桥 |
+
+### 共享基础设施
+| 仓库 | 说明 |
+|---|---|
+| [**Workflows**](https://github.com/RimWorld-RimMind-Mod/Workflows) | 跨仓库复用的 GitHub Actions 工作流（CI 测试矩阵与 AI 双语 Release Notes） |
+| [**.github**](https://github.com/RimWorld-RimMind-Mod/.github) | 组织级配置、社区指引与 Issue/PR 模板 |
 
 ---
 
@@ -102,7 +115,7 @@ flowchart TD
    - 所有子模组均**仅引用 Core 输出的三个纯净程序集**（`0_RimMindDomain.dll`, `1_RimMindApplication.dll`, `2_RimMindCore.dll`）。
    - 子模组之间**绝对禁止**产生直接的 C# 项目工程引用或 DLL 互引。
 2. **RimWorld 游戏加载顺序（`About.xml`）**：
-   - 基础排序：`Harmony` → `RimMind - Core` → `各子模组 (Actions/Memory/Personality/Dialogue)` → `Advisor` → `Storyteller` → `Bridge-RimTalk / Bridge-RimChat`。
+   - 基础排序：`Harmony` → `RimMind - Core` → `各玩法子模组 (Actions/Memory/Personality/Dialogue)` → `Advisor` → `Storyteller` → `Bridge-RimTalk / Bridge-RimChat`。
 3. **运行时数据流解耦**：
    - **Thought 状态通道**：Personality 与 Dialogue 将状态写入游戏原生 Thought，Advisor 仅通过 Core 提供的 Context Provider 异步感知，不直连对应模组类。
    - **ToolCall 抽象**：Advisor 仅调用 Core 的 `RimMindAPI.Tools`，具体动作由 Actions 注册。
@@ -110,29 +123,30 @@ flowchart TD
 
 ---
 
-## 🚀 开发者快速上手
+## 🚀 玩家与开发者指南
 
-### 克隆仓库（包含所有子模块）
+### 🎮 玩家安装与模组启用
+1. 确保安装前置模组 **Harmony**。
+2. 必须启用 **RimMind - Core**（核心底座）。
+3. 按照个人喜好自由启用玩法子模组（如 Advisor 顾问、Dialogue 对话、Personality 人格等）。
+4. 若同时安装了第三方对话模组（RimTalk / RimChat），请启用对应的 Bridge 模组以获得最佳协调体验。
 
-```powershell
-git clone --recurse-submodules https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod.git
-cd RimWorld-RimMind-Mod
+### 🛠️ 开发者与贡献者
+各模组作为独立 Git 仓库管理。贡献代码时，可直接克隆对应的模组仓库：
+
+```bash
+# 克隆核心仓库
+git clone https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Core.git
+
+# 或克隆指定玩法模组
+git clone https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Advisor.git
 ```
 
-### 构建与测试
-
-编译要求：.NET 10 SDK（编译测试工程）与 .NET Framework 4.8（游戏目标环境）。
+编译测试要求：.NET 10 SDK（编译测试工程）与 .NET Framework 4.8（RimWorld 运行环境）。
 
 ```powershell
-# 1. 静态与代码健康度检查
-./auto-test/scripts/source-check.ps1 -Category all
-
-# 2. 编译并运行 Core 测试
-dotnet build RimMind-Core/Source/RimMindCore.csproj -c Release
-dotnet test RimMind-Core/Tests/RimMindCore.Tests.csproj -c Release
-
-# 3. 运行子模块测试 (例如 Advisor)
-dotnet test RimMind-Advisor/Tests/RimMindAdvisor.Tests.csproj -c Release
+# 编译并运行模组测试
+dotnet test Tests/RimMindCore.Tests.csproj -c Release
 ```
 
 ---
@@ -140,7 +154,7 @@ dotnet test RimMind-Advisor/Tests/RimMindAdvisor.Tests.csproj -c Release
 ## 🤝 参与贡献
 
 我们欢迎社区贡献！
-- 提交 Bug 或需求：请前往对应子模组的 [Issues](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Core/issues)。
+- 提交 Bug 或需求：请前往对应模组的 [Issues](https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Core/issues)。
 - 了解开发规范：请查阅各仓库根目录的 `AGENTS.md` 与 [CONTRIBUTING.md](CONTRIBUTING.md)。
 
 ---
