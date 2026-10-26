@@ -2,16 +2,16 @@
 
 > **为 RimWorld 注入 AI 灵魂** —— 基于大语言模型（LLM）的多智能体动态叙事、人格塑造与自主决策模组套件。
 
-[![RimWorld Version](https://img.shields.io/badge/RimWorld-1.6-brightgreen.svg)](https://rimworldgame.com/)
-[![Harmony](https://img.shields.io/badge/Harmony-2.x-blue.svg)](https://github.com/pardeike/Harmony)
-[![.NET](https://img.shields.io/badge/.NET%20Framework-4.8-purple.svg)](https://dotnet.microsoft.com/)
+[![RimWorld Version](https://img.shields.io/badge/RimWorld-1.6%20%7C%201.7-brightgreen.svg)](https://rimworldgame.com/)
+[![Harmony](https://img.shields.io/badge/Harmony-2.x%20%7C%203.x-blue.svg)](https://github.com/pardeike/Harmony)
+[![.NET](https://img.shields.io/badge/.NET-4.8%20%7C%2010.0-purple.svg)](https://dotnet.microsoft.com/)
 [![License](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ---
 
 ## 📖 关于 RimMind
 
-**RimMind** 是一套面向 **RimWorld 1.6** 的现代化模块化 AI 模组生态系统。通过将现代大语言模型（LLM）的多智能体协同技术与游戏原生机制深度结合，为边缘世界中的殖民者（Pawn）赋予深度的心理活动、长期记忆、自然语言对话和自主意图决策能力。
+**RimMind** 是一套面向 **RimWorld 1.6 / 1.7** 的现代化模块化 AI 模组生态系统。通过将现代大语言模型（LLM）的多智能体协同技术与游戏原生机制深度结合，为边缘世界中的殖民者（Pawn）赋予深度的心理活动、长期记忆、自然语言对话和自主意图决策能力。
 
 套件由 **1 个核心基础设施底座（Core）**、**6 大功能玩法模组（Actions, Advisor, Dialogue, Personality, Memory, Storyteller）**、**1 个扩展模型网关模组（Extension-ModelService）** 与 **2 个第三方兼容桥（Bridge-RimTalk, Bridge-RimChat）** 共 **10 个独立可加载模组** 组成。每个模组均可独立发布与选用，遵循严格的单向依赖与单一职责原则。
 
@@ -54,7 +54,7 @@
 flowchart TD
     subgraph External["外部前置与兼容目标"]
         Harmony["Harmony (brrainz.harmony)"]
-        RimWorld["RimWorld 1.6 (Verse / RimWorld)"]
+        RimWorld["RimWorld 1.6 / 1.7 (Verse / RimWorld)"]
         RimTalkMod["RimTalk (可选第三方)"]
         RimChatMod["RimChat (可选第三方)"]
     end
@@ -184,7 +184,7 @@ git clone https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Core.git
 git clone https://github.com/RimWorld-RimMind-Mod/RimWorld-RimMind-Mod-Advisor.git
 ```
 
-编译测试要求：.NET 10 SDK（编译测试工程）与 .NET Framework 4.8（RimWorld 运行环境）。
+编译测试要求：.NET 10 SDK（测试工程与 RimWorld 1.7 运行环境）与 .NET Framework 4.8（RimWorld 1.6 运行环境）。
 
 ```powershell
 # 编译并运行模组测试
